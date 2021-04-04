@@ -41,7 +41,6 @@ const getUserProfile = asyncHandler(async (req, res) => {
         res.status(404)
         throw new Error('User not found')
     }
-
 })
 
 // @desc    Create a new User
@@ -56,11 +55,17 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new Error('User already exists')
     }
 
-    const user = await User.create({
-        name,
-        email,
-        password
-    })
+    let user = null;
+    try {
+        user = await User.create({
+            name,
+            email,
+            password
+        })
+    } catch (error) {
+        res.status(400)
+        throw new Error(error.message)
+    }
 
     if (user) {
         res.status(201)
