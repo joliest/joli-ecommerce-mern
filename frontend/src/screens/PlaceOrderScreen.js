@@ -39,8 +39,6 @@ const PlaceOrderScreen = ({ history }) => {
         }));
     }
 
-    const { address, city, postalCode, country } = cart.shippingAddress;
-
     return (
         <>       
             <CheckoutSteps step1 step2 step3 step4 />
@@ -51,9 +49,9 @@ const PlaceOrderScreen = ({ history }) => {
                             <h2>Shipping</h2>
                             <p>
                                 <strong>Address:</strong>
-                                {address}, {city} {' '} 
-                                {postalCode}, {' '}
-                                {country}
+                                {cart.shippingAddress.address}, {cart.shippingAddress.city} {' '} 
+                                {cart.shippingAddress.postalCode}, {' '}
+                                {cart.shippingAddress.country}
                             </p>
                         </ListGroup.Item>
 
@@ -120,7 +118,7 @@ const PlaceOrderScreen = ({ history }) => {
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
-                                { error && <Message variant="danger">{error}</Message>}
+                                  { error && <Message variant="danger">{error}</Message>}
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Button 
